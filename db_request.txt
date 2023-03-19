@@ -1,0 +1,9 @@
+create table city (code integer primary key, name varchar(100));
+create table customer (code integer primary key, name varchar(100), city_code integer, CONSTRAINT fk_city FOREIGN KEY(city_code) REFERENCES city(code) ON DELETE SET NULL);
+
+insert into city values (1, 'Москва'),(2, 'Санкт-Петербург'),(3, 'Пермь'),(4, 'Воронеж'),(5, 'Липецк');
+insert into customer values (1, 'Иванов Т.М', 3),(2, 'Пановко И.Т.', 2),(3, 'Черненко И.А.', 3),(4, 'Пановко А.И.', 2),(5, 'Иванова А.И.', 1);
+
+select customer.code, customer.name, city.name as city_name from city join customer on customer.city_code = city.code;
+select customer.code, customer.name, city.name as city_name from customer left join city on customer.city_code = city.code;
+select customer.code, customer.name, city.name as city_name from customer right join city on customer.city_code = city.code;
